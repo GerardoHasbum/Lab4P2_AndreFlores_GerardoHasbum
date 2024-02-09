@@ -2,7 +2,7 @@ package lab4p2_andreflores_gerardohasbum;
 
 public class Viento extends Agentes {
 
-    public Viento(double precio, int vida, double DMG, String nombre, int edad) {
+    public Viento(double precio, double vida, double DMG, String nombre, int edad) {
         super(precio, vida, DMG, nombre, edad);
     }
 

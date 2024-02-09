@@ -36,7 +36,7 @@ public abstract class Agentes extends Personas {
         return vida;
     }
 
-    public void setVida(int vida) {
+    public void setVida(double vida) {
         this.vida = vida;
     }
 

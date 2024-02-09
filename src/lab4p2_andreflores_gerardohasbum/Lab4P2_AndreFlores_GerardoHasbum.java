@@ -35,6 +35,7 @@ public class Lab4P2_AndreFlores_GerardoHasbum {
             System.out.println("1. Ingresar sesion");
             System.out.println("2. Salir");
             inicioSesion = entrada.nextInt();
+            entrada.nextLine();
             if (inicioSesion == 1) {
                 int menu = 1;
                 PrintA(usuarios);
@@ -67,16 +68,16 @@ public class Lab4P2_AndreFlores_GerardoHasbum {
                         while (random == pos) {
                             random = ran.nextInt(usuarios.size());
                         }
-                        
+
                         Usuarios temp1 = usuarios.get(pos);
                         Usuarios temp2 = usuarios.get(random);
-                        
+
                         System.out.println(temp1.getUsuario() + " VS. " + temp2.getUsuario());
                         boolean pierde = false;
                         while (pierde == false) {
-                            
+
                             //comienza el combate
-                            PrintA(temp1.agentes);
+                            PrintA(temp1.agentes);//eleccion de atacante aliado
                             System.out.println("Eliga el agente con el que quiere atacar: ");
                             int opcion1 = entrada.nextInt();
                             while (opcion1 < 0 || opcion1 > temp1.agentes.size()) {
@@ -84,10 +85,40 @@ public class Lab4P2_AndreFlores_GerardoHasbum {
                                 PrintA(temp1.agentes);
                                 opcion1 = entrada.nextInt();
                             }
-                            int opcion2 = ran.nextInt(temp2.agentes.size());
+                            int opcion2 = ran.nextInt(temp2.agentes.size());//eleccion de atacante enemigo
                             Agentes tempA1 = temp1.agentes.get(opcion1);
+                            //ataque aliado
+                            PrintA(temp2.agentes);
+                            System.out.println("Eliga el enemigo que le gustaria atacar: ");
+                            int ataque1 = entrada.nextInt();
+                            while (ataque1 < 0 || ataque1 > temp2.agentes.size()) {
+                                System.out.println("Esa posicion no contiene un agente porfavor elegir una opcion valida");
+                                PrintA(temp2.agentes);
+                                ataque1 = entrada.nextInt();
+                            }
+                            Agentes victima1 = temp2.agentes.get(ataque1);
+                            double dmg = tempA1.danio(victima1);
+                            victima1.setVida(victima1.getVida() - dmg);
+                            if (victima1.getVida() < 0) {
+                                victima1.setVida(0);
+                            }
+                            temp2.agentes.remove(ataque1);
+                            temp2.agentes.add(ataque1, victima1);
+                            int cont = 0;
+                            for (int i = 0; i < temp2.agentes.size(); i++) {//validacion si ha ganado el aliado
+                                
+                                if (temp2.agentes.get(i).getVida()>0) {
+                                    cont++;
+                                }
+                                
+                            }
+                            if (cont == 0) {
+                                
+                            }
+                            //fin ataque aliado
                             Agentes tempA2 = temp2.agentes.get(opcion2);
-                            
+                            //ataque enemigo
+
                         }
 
                     }//fin jugar
@@ -120,7 +151,6 @@ public class Lab4P2_AndreFlores_GerardoHasbum {
     private static Usuarios iniciarSesion(ArrayList<Usuarios> usuarios) {
         System.out.println("Inicio de sesion:");
         System.out.print("Nombre de usuario: ");
-        entrada.nextLine();
         String nombreUsuario = entrada.nextLine();
         System.out.print("Contrasenia: ");
         String contrasenia = entrada.nextLine();

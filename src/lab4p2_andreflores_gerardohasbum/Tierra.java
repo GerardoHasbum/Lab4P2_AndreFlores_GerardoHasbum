@@ -2,7 +2,7 @@ package lab4p2_andreflores_gerardohasbum;
 
 public class Tierra extends Agentes {
 
-    public Tierra(double precio, int vida, double DMG, String nombre, int edad) {
+    public Tierra(double precio, double vida, double DMG, String nombre, int edad) {
         super(precio, vida, DMG, nombre, edad);
     }
 
