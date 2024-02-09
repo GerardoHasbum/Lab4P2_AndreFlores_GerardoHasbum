@@ -6,7 +6,7 @@ public class Usuarios extends Personas{
 
     private String usuario, correo, password;
     double dinero;
-    ArrayList agentes = new ArrayList();
+    ArrayList<Agentes> agentes = new ArrayList();
 
     public Usuarios() {
     }
