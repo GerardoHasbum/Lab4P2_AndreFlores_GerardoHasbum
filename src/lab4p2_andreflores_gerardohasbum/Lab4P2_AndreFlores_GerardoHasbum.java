@@ -11,6 +11,20 @@ public class Lab4P2_AndreFlores_GerardoHasbum {
 
     public static void main(String[] args) {
         int inicioSesion = 1;
+        ArrayList<Agentes> agentes = new ArrayList();
+        agentes.add(new Fuego(150.5, 100, 30, "Pyro", 21));
+        agentes.add(new Fuego(150.5, 100, 30, "Flaminhot", 87));
+        agentes.add(new Fuego(150.5, 100, 30, "Cheto", 102));
+        agentes.add(new Agua(150.5, 125, 20, "Cascada", 67));
+        agentes.add(new Agua(150.5, 125, 20, "Squirt", 32));
+        agentes.add(new Agua(150.5, 125, 20, "lluvia", 32));
+        agentes.add(new Viento(150.5, 75, 40, "soplon", 123));
+        agentes.add(new Viento(150.5, 75, 40, "ventorral", 10));
+        agentes.add(new Viento(150.5, 75, 40, "Ankh", 10));
+        agentes.add(new Tierra(150.5, 80, 50, "lodo", 45));
+        agentes.add(new Tierra(150.5, 80, 50, "selva", 12));
+        agentes.add(new Tierra(5, 80, 50, "primo", 6));
+
         ArrayList<Usuarios> usuarios = new ArrayList();
         usuarios.add(new Usuarios("Andre", "andreflor@gmail.com", "pass123", 3000, "Andre", 18));
         //agentes andre
@@ -48,11 +62,11 @@ public class Lab4P2_AndreFlores_GerardoHasbum {
                     principal = iniciarSesion(usuarios);
 
                 }//fin while validacion usuario correcto
-                if (principal.getUsuario().equals("andre")) {
+                if (principal.getUsuario().equals("Andre")) {
                     pos = 0;
-                } else if (principal.getUsuario().equals("gerardo")) {
+                } else if (principal.getUsuario().equals("Gerardo")) {
                     pos = 1;
-                } else if (principal.getUsuario().equals("jack")) {
+                } else if (principal.getUsuario().equals("Jack")) {
                     pos = 2;
                 }
                 while (menu > 0 && menu < 3) {//while 2
@@ -77,11 +91,17 @@ public class Lab4P2_AndreFlores_GerardoHasbum {
                         while (pierde == false) {
 
                             //comienza el combate
+                            System.out.println("*****TURNO DE " + usuarios.get(pos).getUsuario() + "*****");
                             PrintA(temp1.agentes);//eleccion de atacante aliado
                             System.out.println("Eliga el agente con el que quiere atacar: ");
                             int opcion1 = entrada.nextInt();
-                            while (opcion1 < 0 || opcion1 > temp1.agentes.size()) {
+                            while (opcion1 < 0 || opcion1 > temp1.agentes.size() - 1) {
                                 System.out.println("Esa posicion no contiene un agente porfavor elegir una opcion valida");
+                                PrintA(temp1.agentes);
+                                opcion1 = entrada.nextInt();
+                            }
+                            while (temp1.agentes.get(opcion1).getVida() == 0) {
+                                System.out.println("Ese agente esta KO'd favor elegir otro");
                                 PrintA(temp1.agentes);
                                 opcion1 = entrada.nextInt();
                             }
@@ -91,7 +111,7 @@ public class Lab4P2_AndreFlores_GerardoHasbum {
                             PrintA(temp2.agentes);
                             System.out.println("Eliga el enemigo que le gustaria atacar: ");
                             int ataque1 = entrada.nextInt();
-                            while (ataque1 < 0 || ataque1 > temp2.agentes.size()) {
+                            while (ataque1 < 0 || ataque1 > temp2.agentes.size() - 1) {
                                 System.out.println("Esa posicion no contiene un agente porfavor elegir una opcion valida");
                                 PrintA(temp2.agentes);
                                 ataque1 = entrada.nextInt();
@@ -106,19 +126,53 @@ public class Lab4P2_AndreFlores_GerardoHasbum {
                             temp2.agentes.add(ataque1, victima1);
                             int cont = 0;
                             for (int i = 0; i < temp2.agentes.size(); i++) {//validacion si ha ganado el aliado
-                                
-                                if (temp2.agentes.get(i).getVida()>0) {
+
+                                if (temp2.agentes.get(i).getVida() > 0) {
                                     cont++;
                                 }
-                                
+
                             }
-                            if (cont == 0) {
-                                
+                            if (cont == 0) {//preparacion para la siguiente ronda y validacion de gane
+                                System.out.println(temp1.getUsuario() + " ha ganado!");
+                                break;
                             }
                             //fin ataque aliado
-                            Agentes tempA2 = temp2.agentes.get(opcion2);
-                            //ataque enemigo
+                            //comienza el combate enemigo
 
+                            System.out.println("*****TURNO DE " + temp2.getUsuario() + "*****");
+                            System.out.println("Eliga el agente con quien quiere atacar: ");
+                            PrintA(temp2.agentes);
+                            int opcionE = ran.nextInt(temp2.agentes.size());
+                            while (temp2.agentes.get(opcionE).getVida() == 0) {
+                                opcionE = ran.nextInt(temp2.agentes.size());
+                            }
+                            System.out.println(opcionE);
+                            Agentes enemigo = temp2.agentes.get(opcionE);
+                            System.out.println("Eliga el agente al que quiere atacar: ");
+                            PrintA(temp1.agentes);
+                            int opcionA = ran.nextInt(temp1.agentes.size());
+                            while (temp1.agentes.get(opcionA).getVida() == 0) {
+                                opcionA = ran.nextInt(temp1.agentes.size());
+                            }
+                            System.out.println(opcionA);
+                            Agentes aliado = temp1.agentes.get(opcionA);
+                            double dmgE = enemigo.danio(aliado);
+                            aliado.setVida(aliado.getVida() - dmgE);
+                            temp1.agentes.remove(opcionA);
+                            temp1.agentes.add(opcionA, aliado);
+                            int contE = 0;
+                            for (int i = 0; i < temp1.agentes.size(); i++) {
+
+                                if (temp1.agentes.get(i).getVida() > 0) {
+                                    contE++;
+                                }
+
+                            }
+                            if (contE == 0) {
+                                System.out.println(temp2.getUsuario() + " ha ganado!");
+                                break;
+                            }
+                            //ataque enemigo
                         }
 
                     }//fin jugar
@@ -139,6 +193,20 @@ public class Lab4P2_AndreFlores_GerardoHasbum {
                         }//fin ver lista
 
                         if (menu == 2) {//comienza comprar agentes
+
+                            PrintA(agentes);
+                            System.out.println("\nusted tiene: " + principal.getDinero() + "dolares");
+                            System.out.println("ingrese el indice del agente que quiere comprar");
+                            int indice = entrada.nextInt();
+
+                            if (agentes.get(indice).getPrecio() > principal.getDinero()) {
+                                System.out.println("no tiene suficiente dinero.");
+
+                            } else {
+                                principal.setDinero(principal.getDinero() - agentes.get(indice).getPrecio());
+                                System.out.println(principal.getUsuario() + "tiene: " + principal.getDinero() + "dolares");
+                                principal.agentes.add(agentes.get(indice));
+                            }
 
                         }//fin comprar agentes
 
