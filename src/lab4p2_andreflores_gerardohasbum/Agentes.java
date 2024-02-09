@@ -48,13 +48,13 @@ public abstract class Agentes extends Personas {
         this.DMG = DMG;
     }
 
-    public abstract void danio();
 
     @Override
     public String toString() {
-        return "Agentes{" + "precio=" + precio + ", vida=" + vida + ", DMG=" + DMG + '}';
+        return super.toString() + "precio=" + precio + ", vida=" + vida + ", DMG=" + DMG + '}';
     }
     
-    
+    public abstract double danio(Agentes agente);
+
 
 }
