@@ -15,6 +15,8 @@ public abstract class Tierra extends Agentes {
             trudmg = getDMG() * 1.3;
         } else if (agente instanceof Viento) {
             trudmg = getDMG() * 0.4;
+        } else if (agente instanceof Tierra) {
+            trudmg =0;
         }
         
         return trudmg;

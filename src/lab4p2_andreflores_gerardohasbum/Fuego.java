@@ -15,6 +15,8 @@ public abstract class Fuego extends Agentes {
             trudmg = getDMG() * 0.85;
         } else if (agente instanceof Viento) {
             trudmg = getDMG() * 0.5;
+        } else if (agente instanceof Fuego) {
+            trudmg = 0;
         }
         
         return trudmg;

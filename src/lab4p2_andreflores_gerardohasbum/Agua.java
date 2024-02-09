@@ -13,6 +13,8 @@ public abstract class Agua extends Agentes{
             trudmg = getDMG();
         } else if (agente instanceof Viento) {
             trudmg = getDMG() * 0.5;
+        } else if (agente instanceof Agua) {
+            trudmg = 0;
         }
         
         return trudmg;

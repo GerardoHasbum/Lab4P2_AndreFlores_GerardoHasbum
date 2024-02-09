@@ -11,13 +11,13 @@ package lab4p2_andreflores_gerardohasbum;
 public abstract class Agentes extends Personas {
 
     private double precio;
-    private int vida;
-    double DMG;
+    private double vida;
+    private double DMG;
 
     public Agentes() {
     }
 
-    public Agentes(double precio, int vida, double DMG, String nombre, int edad) {
+    public Agentes(double precio, double vida, double DMG, String nombre, int edad) {
         super(nombre, edad);
         this.precio = precio;
         this.vida = vida;
@@ -32,7 +32,7 @@ public abstract class Agentes extends Personas {
         this.precio = precio;
     }
 
-    public int getVida() {
+    public double getVida() {
         return vida;
     }
 

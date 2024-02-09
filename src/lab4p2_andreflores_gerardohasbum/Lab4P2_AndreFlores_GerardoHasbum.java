@@ -14,14 +14,19 @@ public class Lab4P2_AndreFlores_GerardoHasbum {
         usuarios.add(new Usuarios("andre", "andreflor@gmail.com", "pass123", 3000, "andre", 18));
         usuarios.add(new Usuarios("gerardo", "gerardoH@gmail.com", "clave123", 3000, "gerardo", 18));
         usuarios.add(new Usuarios("jack", "jack@gmail.com", "jack123", 3000, "jack", 18));
-        int inicioSesion;
-        PrintA(usuarios);
-        Usuarios principal = iniciarSesion(usuarios);
-        while (principal == null) {
+        System.out.println("Ingrese una opcion: ");
+        System.out.println("1. Ingresar sesion");
+        System.out.println("2. Salir");
+        int inicioSesion = entrada.nextInt();
+        if (inicioSesion == 1) {
+            PrintA(usuarios);
+            Usuarios principal = iniciarSesion(usuarios);
+            while (principal == null) {
 
-            System.out.println("Ese usuario no existe favor intentar de nuevo");
-            principal = iniciarSesion(usuarios);
+                System.out.println("Ese usuario no existe favor intentar de nuevo");
+                principal = iniciarSesion(usuarios);
 
+            }
         }
 
     }
