@@ -53,7 +53,7 @@ public class Usuarios extends Personas{
 
     @Override
     public String toString() {
-        return super.toString() + "usuario=" + usuario + ", correo=" + correo + ", password=" + password + ", dinero=" + dinero + ", agentes=" + agentes + '}';
+        return super.toString() + "usuario=" + usuario + ", correo=" + correo + ", password=" + password + ", dinero=" + dinero + ", agentes=" + agentes + ", ";
     }
     
     

@@ -8,7 +8,7 @@ public class Fuego extends Agentes {
 
     @Override
     public String toString() {
-        return "Fuego:" + super.toString();
+        return "Fuego: " + super.toString();
     }
 
     @Override

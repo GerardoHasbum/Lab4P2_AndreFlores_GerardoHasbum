@@ -7,23 +7,24 @@ import java.util.ArrayList;
 public class Lab4P2_AndreFlores_GerardoHasbum {
 
     static Scanner entrada = new Scanner(System.in);
+    static Random ran = new Random();
 
     public static void main(String[] args) {
         int inicioSesion = 1;
         ArrayList<Usuarios> usuarios = new ArrayList();
-        usuarios.add(new Usuarios("andre", "andreflor@gmail.com", "pass123", 3000, "andre", 18));
+        usuarios.add(new Usuarios("Andre", "andreflor@gmail.com", "pass123", 3000, "Andre", 18));
         //agentes andre
         usuarios.get(0).agentes.add(new Fuego(150.5, 100, 30, "Pyro", 21));
         usuarios.get(0).agentes.add(new Agua(150.5, 125, 20, "Squirt", 32));
         usuarios.get(0).agentes.add(new Viento(150.5, 75, 40, "Ankh", 10));
         //fin agentes andre
-        usuarios.add(new Usuarios("gerardo", "gerardoH@gmail.com", "clave123", 3000, "gerardo", 18));
+        usuarios.add(new Usuarios("Gerardo", "gerardoH@gmail.com", "clave123", 3000, "Gerardo", 18));
         //agentes gerardo
         usuarios.get(1).agentes.add(new Fuego(150.5, 100, 30, "Pyro", 21));
         usuarios.get(1).agentes.add(new Agua(150.5, 125, 20, "Squirt", 32));
         usuarios.get(1).agentes.add(new Viento(150.5, 75, 40, "Ankh", 10));
         //fin agentes gerardo
-        usuarios.add(new Usuarios("jack", "jack@gmail.com", "jack123", 3000, "jack", 18));
+        usuarios.add(new Usuarios("Jack", "jack@gmail.com", "jack123", 3000, "Jack", 18));
         //agentes jack
         usuarios.get(2).agentes.add(new Fuego(150.5, 100, 30, "Pyro", 21));
         usuarios.get(2).agentes.add(new Agua(150.5, 125, 20, "Squirt", 32));
@@ -61,6 +62,33 @@ public class Lab4P2_AndreFlores_GerardoHasbum {
                     menu = entrada.nextInt();
 
                     if (menu == 1) {//comienzo jugar
+
+                        int random = ran.nextInt(usuarios.size());
+                        while (random == pos) {
+                            random = ran.nextInt(usuarios.size());
+                        }
+                        
+                        Usuarios temp1 = usuarios.get(pos);
+                        Usuarios temp2 = usuarios.get(random);
+                        
+                        System.out.println(temp1.getUsuario() + " VS. " + temp2.getUsuario());
+                        boolean pierde = false;
+                        while (pierde == false) {
+                            
+                            //comienza el combate
+                            PrintA(temp1.agentes);
+                            System.out.println("Eliga el agente con el que quiere atacar: ");
+                            int opcion1 = entrada.nextInt();
+                            while (opcion1 < 0 || opcion1 > temp1.agentes.size()) {
+                                System.out.println("Esa posicion no contiene un agente porfavor elegir una opcion valida");
+                                PrintA(temp1.agentes);
+                                opcion1 = entrada.nextInt();
+                            }
+                            int opcion2 = ran.nextInt(temp2.agentes.size());
+                            Agentes tempA1 = temp1.agentes.get(opcion1);
+                            Agentes tempA2 = temp2.agentes.get(opcion2);
+                            
+                        }
 
                     }//fin jugar
 

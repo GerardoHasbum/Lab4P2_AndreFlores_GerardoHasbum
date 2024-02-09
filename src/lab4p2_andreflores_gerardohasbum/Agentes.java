@@ -51,7 +51,7 @@ public abstract class Agentes extends Personas {
 
     @Override
     public String toString() {
-        return super.toString() + "precio=" + precio + ", vida=" + vida + ", DMG=" + DMG + '}';
+        return super.toString() + "precio=" + precio + ", vida=" + vida + ", DMG=" + DMG + ", ";
     }
     
     public abstract double danio(Agentes agente);
