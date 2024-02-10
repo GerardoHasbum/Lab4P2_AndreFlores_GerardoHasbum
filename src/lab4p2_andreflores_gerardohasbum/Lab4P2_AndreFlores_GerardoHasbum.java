@@ -117,24 +117,29 @@ public class Lab4P2_AndreFlores_GerardoHasbum {
                                 ataque1 = entrada.nextInt();
                             }
                             Agentes victima1 = temp2.agentes.get(ataque1);
-                            double dmg = tempA1.danio(victima1);
-                            victima1.setVida(victima1.getVida() - dmg);
-                            if (victima1.getVida() < 0) {
-                                victima1.setVida(0);
-                            }
-                            temp2.agentes.remove(ataque1);
-                            temp2.agentes.add(ataque1, victima1);
-                            int cont = 0;
-                            for (int i = 0; i < temp2.agentes.size(); i++) {//validacion si ha ganado el aliado
-
-                                if (temp2.agentes.get(i).getVida() > 0) {
-                                    cont++;
+                            int hitormiss = ran.nextInt(8);
+                            if (hitormiss == 7) {
+                                System.out.println("Fallaste :c");
+                            } else {
+                                double dmg = tempA1.danio(victima1);
+                                victima1.setVida(victima1.getVida() - dmg);
+                                if (victima1.getVida() < 0) {
+                                    victima1.setVida(0);
                                 }
+                                temp2.agentes.remove(ataque1);
+                                temp2.agentes.add(ataque1, victima1);
+                                int cont = 0;
+                                for (int i = 0; i < temp2.agentes.size(); i++) {//validacion si ha ganado el aliado
 
-                            }
-                            if (cont == 0) {//preparacion para la siguiente ronda y validacion de gane
-                                System.out.println(temp1.getUsuario() + " ha ganado!");
-                                break;
+                                    if (temp2.agentes.get(i).getVida() > 0) {
+                                        cont++;
+                                    }
+
+                                }
+                                if (cont == 0) {//preparacion para la siguiente ronda y validacion de gane
+                                    System.out.println(temp1.getUsuario() + " ha ganado!");
+                                    break;
+                                }
                             }
                             //fin ataque aliado
                             //comienza el combate enemigo
@@ -155,24 +160,29 @@ public class Lab4P2_AndreFlores_GerardoHasbum {
                                 opcionA = ran.nextInt(temp1.agentes.size());
                             }
                             System.out.println(opcionA);
-                            Agentes aliado = temp1.agentes.get(opcionA);
-                            double dmgE = enemigo.danio(aliado);
-                            aliado.setVida(aliado.getVida() - dmgE);
-                            temp1.agentes.remove(opcionA);
-                            temp1.agentes.add(opcionA, aliado);
-                            int contE = 0;
-                            for (int i = 0; i < temp1.agentes.size(); i++) {
+                            hitormiss = ran.nextInt(8);
+                            if (hitormiss == 7) {
+                                System.out.println("Fallaste :c");
+                            } else {
+                                Agentes aliado = temp1.agentes.get(opcionA);
+                                double dmgE = enemigo.danio(aliado);
+                                aliado.setVida(aliado.getVida() - dmgE);
+                                temp1.agentes.remove(opcionA);
+                                temp1.agentes.add(opcionA, aliado);
+                                int contE = 0;
+                                for (int i = 0; i < temp1.agentes.size(); i++) {
 
-                                if (temp1.agentes.get(i).getVida() > 0) {
-                                    contE++;
+                                    if (temp1.agentes.get(i).getVida() > 0) {
+                                        contE++;
+                                    }
+
                                 }
-
+                                if (contE == 0) {
+                                    System.out.println(temp2.getUsuario() + " ha ganado!");
+                                    break;
+                                }
+                                //ataque enemigo
                             }
-                            if (contE == 0) {
-                                System.out.println(temp2.getUsuario() + " ha ganado!");
-                                break;
-                            }
-                            //ataque enemigo
                         }
 
                     }//fin jugar
